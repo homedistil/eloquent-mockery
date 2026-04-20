@@ -16,7 +16,7 @@ class FakeConnection extends Connection implements ConnectionInterface
             return new FakePDO;
         }, $db, $prefix, $config);
 
-        $fakeConnection->setQueryGrammar(new FakeGrammar);
+        $fakeConnection->setQueryGrammar(new FakeGrammar($fakeConnection));
         
         return $fakeConnection;
     }
@@ -45,7 +45,7 @@ class FakeConnection extends Connection implements ConnectionInterface
 
     protected function getDefaultQueryGrammar()
     {
-        return new FakeGrammar;
+        return new FakeGrammar($this);
     }
 
     public function statement($query, $bindings = [])
