@@ -757,7 +757,7 @@ class FakeDB
             $op = '===';
         }
 
-        $result = array_filter(self::$fakeRows[$table1], function ($row) use ($table1, $table2, $column1, $column2, $op) {
+        $result = array_filter(self::$fakeRows[$table1] ?? [], function ($row) use ($table1, $table2, $column1, $column2, $op) {
             foreach (self::$fakeRows[$table2] as $row2) {
                 if (eval('return $row[$table1][$column1] '.$op.' $row2[$table2][$column2];')) {
                     return true;
